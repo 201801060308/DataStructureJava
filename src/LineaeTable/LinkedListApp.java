@@ -8,15 +8,30 @@ public class LinkedListApp {
         theList.insertFirst(66,6.99);
         theList.insertFirst(88,8.99);
 
-        theList.displayList();
-
+        /*theList.displayList();
         while(!theList.isEmpty()){
             Link aLink =  theList.deleteFirst();
             System.out.println("Deleted");
             aLink.displayLink();
             System.out.println("");
         }
-        theList.displayList();
+        theList.displayList();*/
+
+        Link L = theList.find(44);
+        if(L == null){
+            System.out.println("Can't find link");
+        }
+        else {
+            System.out.println("Found the link with the key:"+L.iData);
+        }
+
+        Link l = theList.delete(66);
+        if(l == null){
+            System.out.println("Can't delete the key");
+        }
+        else{
+            System.out.println("Delete the link with the key"+l.iData);
+        }
     }
 }
 
