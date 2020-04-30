@@ -11,7 +11,7 @@ public class Tree {
     }
 
     /**
-     *左子树小于右子树
+     *建立二叉搜索树，左子树小于右子树
      */
     public Node find(int key){
         Node current = root;
@@ -83,7 +83,7 @@ public class Tree {
     /**
      * 后序遍历
      */
-    public void afterOrder(Node root){
+    public void postOrder(Node root){
         if(root != null){
             inOrder(root.lefChild);
             inOrder(root.rightChild);
@@ -160,12 +160,39 @@ public class Tree {
                  parent.rightChild = current.rightChild;
          }
 
-         //有两个节点
+         //要删除的节点有两个节点，用其中序遍历的后继节点代替该节点
          else{
-
+             Node successor = getSuccessor(current);
+             if(current == root){
+                 root = successor;
+             }
+             else if(isleftChiled){
+                 parent.lefChild = successor;
+             }
+             else{
+                 parent.rightChild = successor;
+             }
+             successor.lefChild = current.lefChild;
          }
+         return true;
+     }
 
-         
+     //查找后继节点
+     public Node getSuccessor(Node delNode){
+         Node successorParent = delNode;
+         Node successor = delNode;
+         Node current = delNode.rightChild;
+         while(current != null){
+             successorParent = successor;
+             successor = current;
+             current = current.rightChild;
+         }//向左遍历待删除节点的右子树
+
+         if (successor != delNode.rightChild){
+             successorParent.lefChild = successor.rightChild;
+             successor.rightChild = delNode.rightChild;
+         }
+         return successor;
      }
 
 }
